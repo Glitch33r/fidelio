@@ -1,0 +1,32 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+    <div class="container">
+        <div class="login">
+            <h1>FIDELIO FZE</h1>
+
+                              <form action="{{ path("fos_user_security_check") }}" method="post">
+
+                                {% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN')%}
+                                    <a href="{{ path('fos_user_security_logout') }}">
+                                        <input class="btn btn-primary btn-block btn-large" type="submit" id="_submit" name="_submit" value="Logout" /></a>
+                                {% else %}
+
+                                    {% if csrf_token %}
+                                            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                                    {% endif %}
+
+
+                                    <label for="username">{{ 'security.login.username'|trans }}</label>
+                                    <input class="form-control" type="text" id="username" name="_username" placeholder="Username or email" value="{{ last_username }}" required="required" />
+                                    <label for="password">{{ 'security.login.password'|trans }}</label>
+                                    <input class="form-control" type="password" id="password" name="_password" placeholder="Password" required="required" />
+                                    <br>
+                                    <input class="btn btn-lg btn-success btn-block" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+
+                                {% endif %}
+                            </form>
+
+        </div>
+    </div>
+{% endblock %}

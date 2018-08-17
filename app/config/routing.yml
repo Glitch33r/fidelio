@@ -1,3 +1,32 @@
-app:
-    resource: '@AppBundle/Controller/'
-    type: annotation
+############################################################################
+#########          OWN BUNDLES          ####################################
+############################################################################
+
+frontend:
+    resource: "@FrontendBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+#backend:
+#    resource: "@BackendBundle/Controller/"
+#    type:     annotation
+#    prefix:   /backend
+
+############################################################################
+
+#ADMIN
+easy_admin_bundle:
+    resource: "@EasyAdminBundle/Controller/AdminController.php"
+    prefix:   /admin
+    type:     annotation
+
+#USER
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+#IMG
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"
+
+elfinder:
+     resource: "@FMElfinderBundle/Resources/config/routing.yml"

@@ -1,0 +1,80 @@
+easy_admin:
+    site_name: 'FIDELIO FZE'
+#    translation_domain: 'messages'
+    design:
+        brand_color: '#333333'
+#        assets:
+#            favicon:
+#                path: 'bundles/frontend/favicons/favicon-32x32.png'
+#                mime_type: 'image/png'
+        menu:
+            - label: 'Main Information'
+              icon: 'home'
+              children:
+                - { label: 'Pages', entity: 'Page' }
+#                - { label: 'Слайдер (Про нас)', entity: 'Slider' }
+#                - { label: 'Новини', entity: 'News' }
+                - { label: 'Contacts', entity: 'Contacts' }
+            - { entity: 'ContactForm', label: 'Contact Form'}
+#            - label: 'Продукція'
+#              icon: 'plus-circle'
+#              children:
+#                - { label: 'Категорії продуктів', entity: 'Category', default: true }
+#                - { label: 'Продукти', entity: 'Product' }
+#                - { label: 'Шкідливі об''єкти', entity: 'HarmfulObjects' }
+##                - { label: 'Опис продукту', entity: 'ProductDescription' }
+#                - { label: 'Корисна інформація', entity: 'HelpfulInformation' }
+##                - { label: 'Что-то еще(тест)', entity: 'AdditionalInformation' }
+            - label: 'Special Information'
+              icon: 'user-secret'
+              children:
+#                - { label: 'Партнери', entity: 'Partners'}
+                - { label: 'Users', entity: 'User' }
+#                - Seo
+#                - Static
+    entities:
+        User:
+            class: BackendBundle\Entity\User
+        Page:
+            class: BackendBundle\Entity\Page
+            list:
+              fields:
+                - id
+                - slug
+                - title
+            form:
+              fields:
+                - { property: 'slug', type_options: { disabled: true }}
+                - title
+        ContactForm:
+            class: BackendBundle\Entity\ContactForm
+            list:
+              fields:
+                - id
+                - name
+                - email
+                - telephone
+                - body
+                - createdAt
+            form:
+              fields:
+                - name
+                - email
+                - telephone
+                - body
+                - createdAt
+        Contacts:
+            class: BackendBundle\Entity\Contacts
+            list:
+              fields:
+                - id
+                - address
+                - email
+                - firstTelephone
+                - secondTelephone
+            form:
+              fields:
+                - address
+                - email
+                - firstTelephone
+                - secondTelephone

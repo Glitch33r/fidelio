@@ -16,7 +16,23 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new AppBundle\AppBundle(),
+
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+            new FM\ElfinderBundle\FMElfinderBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+
+            #user-bundle
+            new FOS\UserBundle\FOSUserBundle(),
+            #admin
+            new EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle(),
+            #uploads
+            new Vich\UploaderBundle\VichUploaderBundle(),
+            #img
+            new Liip\ImagineBundle\LiipImagineBundle(),
+
+            new BackendBundle\BackendBundle(),
+            new FrontendBundle\FrontendBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

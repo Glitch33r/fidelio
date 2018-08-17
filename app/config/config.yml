@@ -2,15 +2,48 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: admin.yml }
+    - { resource: "@BackendBundle/Resources/config/services.yml" }
+    - { resource: "@FrontendBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
 
+    app.path.category_images: /uploads/images/categories
+
+
+
+vich_uploader:
+    db_driver: orm
+    mappings:
+            category_images:
+                uri_prefix:         '%app.path.category_images%'
+                upload_destination: '%kernel.root_dir%/../web/uploads/images/categories'
+
+
+liip_imagine:
+    resolvers:
+        default:
+            web_path: ~
+    loaders:
+            profile_photos:
+                filesystem: ~
+    filter_sets:
+        cache: ~
+
+        slider_thumb:
+            quality: 75
+            filters:
+                thumbnail: { size: [2500, 1400], mode: outbound }
+                background: { size: [2500, 1400], position: center, color: '#ffffff' }
+
 framework:
+    templating:
+            engines: ['twig']
     #esi: ~
-    #translator: { fallbacks: ['%locale%'] }
+    translator: { fallbacks: ['%locale%'] }
     secret: '%secret%'
     router:
         resource: '%kernel.project_dir%/app/config/routing.yml'
@@ -69,3 +102,55 @@ swiftmailer:
 sensio_framework_extra:
    router:
         annotations: false
+
+
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: BackendBundle\Entity\User
+    from_email:
+            address: "a@.a.a"
+            sender_name: "a@.a.a"
+
+stof_doctrine_extensions:
+    orm:
+        default:
+            sortable: true
+            sluggable: true
+            timestampable: true
+
+knp_paginator:
+    page_range: 5                      # default page range used in pagination control
+    default_options:
+        page_name: page                # page query parameter name
+        sort_field_name: sort          # sort field query parameter name
+        sort_direction_name: direction # sort direction query parameter name
+        distinct: true                 # ensure distinct results, useful when ORM queries are using GROUP BY statements
+    template:
+        pagination: 'KnpPaginatorBundle:Pagination:sliding.html.twig'     # sliding pagination controls template
+        sortable: 'KnpPaginatorBundle:Pagination:sortable_link.html.twig' # sort link template
+
+fm_elfinder:
+    instances:
+        default:
+            locale: "%locale%" # defaults to current request locale
+            editor: ckeditor # other choices are tinymce or simple
+            #showhidden: false # defaults to false
+            fullscreen: true # defaults true, applies to simple and ckeditor editors
+            include_assets: true # disable if you want to handle loading of the javascript and css assets yourself
+            connector:
+                debug: false # defaults to false
+                roots:       # at least one root must be defined
+                    uploads:
+                        driver: LocalFileSystem
+                        path: uploads
+                        upload_allow: ['image/png', 'image/jpg', 'image/jpeg']
+                        upload_deny: ['all']
+                        upload_max_size: 10M
+
+ivory_ck_editor:
+    default_config: default
+    configs:
+        default:
+            filebrowserBrowseRoute: elfinder
+            filebrowserBrowseRouteParameters: []
