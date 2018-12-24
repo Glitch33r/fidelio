@@ -1,0 +1,49 @@
+<div class="header-wrap">
+    <div class="header-wrap__logo-block"><a href="{{ url('homepage') }}"><img class="header-wrap__logo-img"
+                                                                              src="{{ asset('/bundles/frontend/image/logo1.svg') }}"></a>
+    </div>
+    <div class="header-wrap__right">
+        <nav class="header-wrap__right-menu head-menu">
+            <ul class="head-menu__items">
+                <li class="head-menu__item"><a
+                            class="head-menu__link {% if app.request.attributes.get('_route') == "homepage" %} active {% endif %}"
+                            href="{{ url('homepage') }}">about us</a>
+                </li>
+                <li class="head-menu__item"><a
+                            class="head-menu__link {% if app.request.attributes.get('_route') == "responsibility" %} active {% endif %}"
+                            href="{{ url('responsibility') }}">Responsibility</a>
+                </li>
+                <li class="head-menu__item"><a
+                            class="head-menu__link {% if app.request.attributes.get('_route') == "trading" %} active {% endif %}"
+                            href="{{ url('trading') }}">trading</a>
+                </li>
+                <li class="head-menu__item"><a
+                            class="head-menu__link {% if app.request.attributes.get('_route') == "projects" %} active {% endif %}"
+                            href="{{ url('projects') }}">projects</a>
+                </li>
+                <li class="head-menu__item"><a
+                            class="head-menu__link {% if app.request.attributes.get('_route') == "contact-us" %} active {% endif %}"
+                            href="{{ url('contact-us') }}">contact us</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="header-wrap__right-text">
+            {% if headertitle != null %}<h1 class="header-wrap__right-title">{{ headertitle }}</h1>{% endif %}
+            <div>
+                <p>{% if subtitle != null %}{{ subtitle|raw }}{% else %}FIDELIO FZE is a private company founded in United Arab Emirates. The company managed by group of
+                        professionals with two decades experience in commodity trading, logistics and marketing.{% endif %}</p>
+            </div>
+            {% if app.request.attributes.get('_route') == 'homepage'%}
+                <div class="header-wrap__right-buttons">
+                    {#<a#}
+                            {#class="header-wrap__right-button header-wrap__right-button_first-button"#}
+                            {#href="{{ url('homepage') }}">about us</a>#}
+                    <a
+                            class="header-wrap__right-button header-wrap__right-button_second-button"
+                            href="{{ url('contact-us') }}">contact
+                        us</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

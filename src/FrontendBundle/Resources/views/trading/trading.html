@@ -1,0 +1,99 @@
+{% extends '@Frontend/base.html.twig' %}
+
+{% block title %}{{ seo.title }}{% endblock %}
+{% block description %}{{ seo.description }}{% endblock %}
+{% block keywords %}{{ seo.keywords }}{% endblock %}
+
+{#{% block bodyclass %}class="responsіbility"{% endblock %}#}
+
+{% block headerbg %}style="background:url({{ asset('/bundles/frontend/image/about-us.png') }});"{% endblock %}
+
+
+{% block header %}
+    {% include '@Frontend/parts/_header.html.twig' with {'subtitle': trade.subtitle, 'headertitle': seo.title } %}
+{% endblock %}
+
+{% block mob %}
+    {% include '@Frontend/parts/_mob-menu.html.twig' %}
+{% endblock %}
+
+
+{% block content %}
+    <main>
+        <div class="main-wrap">
+            {% for i in trade.part %}
+                {% if loop.index == 3 %}
+                    </div>
+                    <div class="content-img content-img_more-txt my-animate">
+                        <h3 class="content-img__title">Machinery and Equipment</h3>
+                        <div class="content-img__info-block info-block">
+                            <div class="info-block__img" style="background: url({{ asset('/bundles/frontend/image/block-info-1.svg') }})"></div>
+                            <div class="info-block__txt">Agricultural equipment, food processing and packaging machinery, commercial
+                                and
+                                industrial refrigeration equipment, and commercial food service equipment.
+                            </div>
+                        </div>
+                        <div class="content-img__info-block info-block">
+                            <div class="info-block__img" style="background: url({{ asset('/bundles/frontend/image/block-info-2.svg') }})"></div>
+                            <div class="info-block__txt">Automotive machinery and related systems, including machine tools, material
+                                handling equipment, welding equipment, and process control technology make up this subsector.
+                            </div>
+                        </div>
+                        <div class="content-img__info-block info-block">
+                            <div class="info-block__img" style="background: url({{ asset('/bundles/frontend/image/block-info-3.svg') }})"></div>
+                            <div class="info-block__txt">Equipment and machinery for generating, transmitting and distributing
+                                electric
+                                power as well as machinery used for oil and gas exploration and production.
+                            </div>
+                        </div>
+                        <div class="content-img__info-block info-block">
+                            <div class="info-block__img" style="background: url({{ asset('/bundles/frontend/image/block-info-4.svg') }})"></div>
+                            <div class="info-block__txt">Major categories include turbines, power transmission equipment, and
+                                internal
+                                combustion engines (except automotive gasoline and aircraft) for electric utility and industrial
+                                applications. Also includes oil and gas field machinery.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="main-wrap">
+                {% endif %}
+                {% if loop.index in [1, 3, 5, 7, 9, 11, 13] %}
+                    <div class="main-wrap__text-block main-wrap__text-block_small-article">
+                        <div class="content__article content__article_small">
+                            <img src="{{ asset('/uploads/images/trade/' ~ i.image) }}">
+                        </div>
+                        <div class="content__article content__article_small">
+                            <h2 class="main-wrap__block-title-txt">{{ i.name }}</h2>
+                            <p class="media-block__txt">
+                                {{ i.text|raw }}
+                            </p>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="main-wrap__text-block main-wrap__text-block_small-article">
+                        <div class="content__article content__article_small">
+                            <h2 class="main-wrap__block-title-txt">{{ i.name }}</h2>
+                            <p class="media-block__txt">
+                                {{ i.text|raw }}
+                            </p>
+                        </div>
+                        <div class="content__article content__article_small">
+                            <img src="{{ asset('/uploads/images/trade/' ~ i.image) }}">
+                        </div>
+                    </div>
+                {% endif %}
+
+                {% if loop.index == loop.last %}
+                    <div class="content__buttons"><a class="header-wrap__right-button header-wrap__right-button_second-button"
+                                                     href="{{ url('projects') }}">projects</a><a
+                                class="header-wrap__right-button header-wrap__right-button_first-button"
+                                href="{{ url('homepage') }}">about
+                            us</a></div>
+                    </div>
+                {% endif %}
+        {% endfor %}
+    </main>
+{% endblock %}
+
+
+

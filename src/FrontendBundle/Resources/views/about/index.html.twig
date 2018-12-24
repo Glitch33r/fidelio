@@ -1,0 +1,78 @@
+{% extends '@Frontend/base.html.twig' %}
+
+{% block title %}{{ seo.title }}{% endblock %}
+{% block description %}{{ seo.description }}{% endblock %}
+{% block keywords %}{{ seo.keywords }}{% endblock %}
+
+{#{% block bodyclass %}class="about-us"{% endblock %}#}
+
+{% block headerbg %}style="background:url({{ asset('/bundles/frontend/image/about-us.png') }});"{% endblock %}
+
+
+{% block header %}
+    {% include '@Frontend/parts/_header.html.twig' with {'subtitle': about.subtitle, 'headertitle': about.title } %}
+{% endblock %}
+
+{% block mob %}
+    {% include '@Frontend/parts/_mob-menu.html.twig' %}
+{% endblock %}
+
+
+{% block content %}
+    <a href="{{ path('translate', {'locale': 'en'}) }}">EN</a>
+    <a href="{{ path('translate', {'locale': 'de'}) }}">DE</a>
+    <main>
+        <section class="main-wrap main-wrap__left-img">
+            <div class="main-wrap__text-block">
+                <div class="content">
+                    <div class="content__text-column">
+                        {% for i in about.part %}
+                            <div class="content__column-item content__column-item_small">
+                                <h3>{{ i.title }}</h3>
+                                <p>{{ i.description }}</p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="content-img my-animate">
+            <div class="content-img__info-block info-block">
+                <div class="info-block__img"
+                     style="background: url({{ asset('/bundles/frontend/image/block-info-1.svg') }})"></div>
+                <div class="info-block__txt">Metals and Minerals</div>
+            </div>
+            <div class="content-img__info-block info-block">
+                <div class="info-block__img"
+                     style="background: url({{ asset('/bundles/frontend/image/block-info-2.svg') }})"></div>
+                <div class="info-block__txt">Energy Products</div>
+            </div>
+            <div class="content-img__info-block info-block">
+                <div class="info-block__img"
+                     style="background: url({{ asset('/bundles/frontend/image/block-info-3.svg') }})"></div>
+                <div class="info-block__txt">Agricultural Products</div>
+            </div>
+            <div class="content-img__info-block info-block">
+                <div class="info-block__img"
+                     style="background: url({{ asset('/bundles/frontend/image/block-info-4.svg') }})"></div>
+                <div class="info-block__txt">Marketing</div>
+            </div>
+        </section>
+        <section class="main-wrap">
+            <div class="main-wrap__text-block content__article">
+                {{ about.bottomtext|raw }}
+                <div class="content__buttons"><a
+                            class="header-wrap__right-button header-wrap__right-button_second-button"
+                            href="{{ url('contact-us') }}">contact
+                        us</a><a class="header-wrap__right-button header-wrap__right-button_first-button"
+                                 href="{{ url('homepage') }}">about
+                        us</a>
+                </div>
+            </div>
+        </section>
+        <section class="map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3595.9206693083474!2d55.77766175823322!3d25.673924347013557!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ef60a12ef78cebd%3A0xeba1ade8a0b4982a!2zMjXCsDQwJzI4LjEiTiA1NcKwNDYnNDEuNCJF!5e0!3m2!1sen!2sua!4v1531226985195"
+                    width="100%" height="380" frameborder="0" style="border:0" allowfullscreen></iframe>
+        </section>
+    </main>
+{% endblock %}

@@ -1,4 +1,9 @@
 easy_admin:
+#    edit:
+#        actions: ['-delete']
+#    list:
+#        actions: ['edit', 'search', '-delete', '-new']
+
     site_name: 'FIDELIO FZE'
 #    translation_domain: 'messages'
     design:
@@ -11,9 +16,12 @@ easy_admin:
             - label: 'Main Information'
               icon: 'home'
               children:
-                - { label: 'Pages', entity: 'Page' }
-#                - { label: 'Слайдер (Про нас)', entity: 'Slider' }
-#                - { label: 'Новини', entity: 'News' }
+                - { label: 'Responsibility', entity: 'Responsibility' }
+#                - { label: 'Responsibility(at home page)', entity: 'Responsibility_home' }
+                - { label: 'RiskManagement on Responsibility page', entity: 'RiskManagement' }
+                - Trading
+                - Project
+                - { label: 'About', entity: 'About' }
                 - { label: 'Contacts', entity: 'Contacts' }
             - { entity: 'ContactForm', label: 'Contact Form'}
 #            - label: 'Продукція'
@@ -30,22 +38,11 @@ easy_admin:
               children:
 #                - { label: 'Партнери', entity: 'Partners'}
                 - { label: 'Users', entity: 'User' }
-#                - Seo
+                - Seo
 #                - Static
     entities:
         User:
             class: BackendBundle\Entity\User
-        Page:
-            class: BackendBundle\Entity\Page
-            list:
-              fields:
-                - id
-                - slug
-                - title
-            form:
-              fields:
-                - { property: 'slug', type_options: { disabled: true }}
-                - title
         ContactForm:
             class: BackendBundle\Entity\ContactForm
             list:
@@ -68,13 +65,112 @@ easy_admin:
             list:
               fields:
                 - id
+                - subtitle
                 - address
                 - email
                 - firstTelephone
                 - secondTelephone
             form:
               fields:
+                - subtitle
                 - address
                 - email
                 - firstTelephone
                 - secondTelephone
+        Seo:
+            class: BackendBundle\Entity\Seo
+            list:
+              fields:
+                - id
+                - slug
+                - page
+                - title
+                - description
+                - keywords
+            form:
+              fields:
+                - { property: 'slug', type_options: { disabled: true }}
+                - page
+                - title
+                - description
+                - keywords
+        Responsibility:
+            class: BackendBundle\Entity\Responsibility
+            list:
+              fields:
+                - id
+                - title
+                - part
+                - updatedAt
+            form:
+              fields:
+                - title
+                - { property: 'part', type: 'collection', type_options: { entry_type: 'BackendBundle\Form\Type\AddNewResp', by_reference: false } }
+        Responsibility_home:
+            class: BackendBundle\Entity\Responsibility_home
+            list:
+              fields:
+                - id
+                - header_title
+                - header_text
+                - text
+                - part
+                - updatedAt
+            form:
+              fields:
+                - header_title
+                - { property: 'header_text', type: 'ckeditor' }
+                - { property: 'text', type: 'ckeditor' }
+                - { property: 'part', type: 'collection', type_options: { entry_type: 'BackendBundle\Form\Type\AddNewResp_home', by_reference: false } }
+        About:
+            class: BackendBundle\Entity\About
+            list:
+              fields:
+                - id
+                - title
+                - subtitle
+                - text
+                - part
+                - updatedAt
+            form:
+              fields:
+                - title
+                - { property: 'subtitle', type: 'ckeditor' }
+                - { property: 'part', type: 'collection', type_options: { entry_type: 'BackendBundle\Form\Type\AddNewAbout', by_reference: false } }
+                - { property: 'text', type: 'ckeditor' }
+                - { property: 'bottomtext', type: 'ckeditor' }
+        RiskManagement:
+            class: BackendBundle\Entity\RiskManagement
+            list:
+              fields:
+                - id
+                - title
+                - part
+            form:
+              fields:
+                - title
+                - { property: 'part', type: 'collection', type_options: { entry_type: 'BackendBundle\Form\Type\AddNewRiskMgm', by_reference: false } }
+        Trading:
+            class: BackendBundle\Entity\Trading
+            list:
+              fields:
+                - id
+                - subtitle
+                - part
+                - updatedAt
+            form:
+              fields:
+                - { property: 'subtitle', type: 'ckeditor' }
+                - { property: 'part', type: 'collection', type_options: { entry_type: 'BackendBundle\Form\Type\AddNewTrade', by_reference: false } }
+        Project:
+            class: BackendBundle\Entity\Project
+            list:
+              fields:
+                - id
+                - subtitle
+                - part
+                - updatedAt
+            form:
+              fields:
+                - { property: 'subtitle', type: 'ckeditor' }
+                - { property: 'part', type: 'collection', type_options: { entry_type: 'BackendBundle\Form\Type\AddNewProj', by_reference: false } }

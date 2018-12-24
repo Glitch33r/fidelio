@@ -2,6 +2,7 @@
 
 namespace BackendBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\HttpFoundation\File\File;
@@ -9,10 +10,10 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="page_information_table")
+ * @ORM\Table(name="about_us_table")
  * @Vich\Uploadable
  */
-class PageInformation
+class About
 {
     /**
      * @ORM\Id
@@ -22,15 +23,14 @@ class PageInformation
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="BackendBundle\Entity\Page")
-     * @ORM\JoinColumn(name="page_id", referencedColumnName="id")
-     */
-    private $page;
-
-    /**
      * @ORM\Column(type="string", nullable=true)
      */
     private $title;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $subtitle;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -38,7 +38,7 @@ class PageInformation
     private $image;
 
     /**
-     * @Vich\UploadableField(mapping="static_images", fileNameProperty="image")
+     * @Vich\UploadableField(mapping="about_images", fileNameProperty="image")
      * @var File
      */
     private $imageFile;
@@ -54,6 +54,48 @@ class PageInformation
      */
     private $text;
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     * @ORM\OneToMany(targetEntity="BackendBundle\Entity\AboutParts", mappedBy="ab", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $part;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $bottomtext;
+
+    /**
+     * @return mixed
+     */
+    public function getBottomtext()
+    {
+        return $this->bottomtext;
+    }
+
+    /**
+     * @param mixed $bottomtext
+     */
+    public function setBottomtext($bottomtext)
+    {
+        $this->bottomtext = $bottomtext;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSubtitle()
+    {
+        return $this->subtitle;
+    }
+
+    /**
+     * @param mixed $subtitle
+     */
+    public function setSubtitle($subtitle)
+    {
+        $this->subtitle = $subtitle;
+    }
 
     /**
      * @return mixed
@@ -63,21 +105,43 @@ class PageInformation
         return $this->id;
     }
 
-
     /**
-     * @return mixed
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function getPage()
+    public function getPart()
     {
-        return $this->page;
+        return $this->part;
     }
 
     /**
-     * @param mixed $page
+     * @param \Doctrine\Common\Collections\Collection $part
      */
-    public function setPage($page)
+    public function setPart($part)
     {
-        $this->page = $page;
+        $this->part = $part;
+    }
+
+    /**
+     * @param \BackendBundle\Entity\AboutParts $part
+     *
+     * @return About
+     */
+    public function addPart(\BackendBundle\Entity\AboutParts $part)
+    {
+        $part->setAb($this);
+
+        $this->part->add($part);
+
+        return $this;
+    }
+
+    /**
+     * @param \BackendBundle\Entity\AboutParts $part
+     *
+     */
+    public function removePart(\BackendBundle\Entity\AboutParts $part)
+    {
+        $this->part->removeElement($part);
     }
 
     /**
@@ -115,6 +179,7 @@ class PageInformation
     public function __construct()
     {
         $this->updatedAt = new \DateTime('now');
+        $this->part = new ArrayCollection();
     }
 
     public function setImageFile(File $image = null)

@@ -1,0 +1,21 @@
+<footer>
+    <div class="footer">
+        <div class="footer__left-block footer-logo">
+            <div class="footer-logo__img"><a href="#"><img src="{{ asset('/bundles/frontend/image/logo1.svg') }}"></a></div>
+        </div>
+        <div class="footer__right-block footer-content">
+            <div class="footer-content__txt footer-content__txt_link">
+                <h3>LINK</h3><a href="{{ url('homepage') }}">About</a><a href="{{ url('projects') }}">Projects</a><a href="{{ url('contact-us') }}">Contact</a>
+            </div>
+            <div class="footer-content__txt footer-content__txt_find-us">
+                <h3>FIND US</h3>
+                <p>{{ contacts.address }}</p>
+            </div>
+            <div class="footer-content__txt footer-content__txt_contact-us">
+                <h3>CONTACT US</h3>
+                <p>T: <a href="tel:{{ contacts.firstTelephone }}">{{ contacts.firstTelephone }}</a></p>
+                <p>E: <a href="mailto:{{ contacts.email }}">{{ contacts.email }}</a></p>
+            </div>
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="description" content={% block description %}{% endblock %}>
+    <meta name="keywords" content={% block keywords %}{% endblock %}>
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('/bundles/frontend/css/jquery.bxslider.css') }}">
+    <link rel="stylesheet" href="{{ asset('/bundles/frontend/css/style.css') }}">
+</head>
+<body {% block bodyclass %}{% endblock %}>
+<header {% block headerbg %}{% endblock %}>
+    {% block header %}{% endblock %}
+    {% block mob %}{% endblock %}
+</header>
+{% block content %}{% endblock %}
+
+{{ render(controller('FrontendBundle:Default:footer')) }}
+<script src="{{ asset('/bundles/frontend/js/jquery-3.3.1.min.js') }}"></script>
+<script src="{{ asset('/bundles/frontend/js/jquery.bxslider.js') }}"></script>
+<script src="{{ asset('/bundles/frontend/js/form.min.js') }}"></script>
+<script src="{{ asset('/bundles/frontend/js/main.js') }}"></script>
+
+</body>
+</html>

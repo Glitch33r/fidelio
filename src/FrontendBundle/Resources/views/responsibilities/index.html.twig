@@ -1,0 +1,121 @@
+{% extends '@Frontend/base.html.twig' %}
+
+{% block title %}{{ responsibilities_home.headerTitle }}{% endblock %}
+{% block description %}{{ seo.description }}{% endblock %}
+{% block keywords %}{{ seo.keywords }}{% endblock %}
+
+
+{#{% block bodyclass %}class="responsіbility"{% endblock %}#}
+
+{% block headerbg %}style="background:url({{ asset('/bundles/frontend/image/about-us.png') }});"{% endblock %}
+
+
+{% block header %}
+    {% include '@Frontend/parts/_header.html.twig' with {'subtitle': responsibilities_home.headerText, 'headertitle': responsibilities_home.headerTitle } %}
+{% endblock %}
+
+{% block mob %}
+    {% include '@Frontend/parts/_mob-menu.html.twig' %}
+{% endblock %}
+
+
+{% block content %}
+    <main>
+        <section class="main-wrap">
+            {% set flag = 0 %}
+            {% set temp = 2 %}
+            {% for i in responsibilities %}
+            {% if loop.index == 3 %}<section class="main-wrap">{% endif %}
+                <div class="main-wrap__text-block content__article">
+                    <h2>{{ i.title }}</h2>
+                    {% for j in i.part %}
+                        <h3 {% if flag == 1 %}class="txt-hide"{% endif %}>{{ j.name }}</h3>
+                        <p {% if flag == 1 %}class="txt-hide"{% endif %}>{{ j.lngtext }}
+                            {% if loop.length > 2 and loop.index == temp and temp != loop.last or loop.index == loop.last %}
+
+                                {#{% set temp = 2 %}#}
+                                {% set flag = 1 %}
+
+                                {% if loop.index == loop.last %}
+                                    <a class="read-more-hide" href="#">Close</a>
+                                {% else %}
+                                    <a class="read-more-show" href="#">Read more</a>
+                                {% endif %}
+
+                            {% endif %}
+                        </p>
+                        {% if loop.index == loop.last %}
+                            {% set flag = 0 %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if loop.index == loop.last %}
+                        <div class="content__buttons"><a
+                                    class="header-wrap__right-button header-wrap__right-button_second-button"
+                                    href="{{ url('projects') }}">PROJECTS</a><a class="header-wrap__right-button header-wrap__right-button_first-button"
+                                         href="{{ url('homepage') }}">about
+                                us</a>
+                        </div>
+                    {% endif %}
+                </div>
+                {% if loop.index == loop.last %}</section>{% endif %}
+                {% if loop.index == 2 %}
+                    </section>
+                    <div class="content-img my-animate">
+                        <div class="content-img__risk-block">
+                            {% for i in risk %}
+                                <div class="content-img__risk-block-wrap content-img__risk-block-wrap_outer my-animate"
+                                     data-top="0">
+                                    <h2 class="content-img__risk-block-title">
+                                        <span class="content-img__risk-block-title-spacer">{{ loop.index }}</span>
+                                        {{ i.title }}
+                                    </h2>
+                                    <div class="content-img__risk-block-list">
+                                        {% for j in i.part %}
+                                            <span class="content-img__risk-block-list-item">{{ j.item }}</span>
+                                        {% endfor %}
+                                    </div>
+                                    {% if loop.index == loop.first %}
+                                        <svg class="first-svg">
+                                            <path class="line-first" d="M 5 6, 135 6" stroke="white" fill="transparent"
+                                                  style="stroke-dasharray: 130; stroke-dashoffset: 0; stroke-width:  2;"></path>
+                                            <path class="line-last" d="M 135 6, 204 90" stroke="white"
+                                                  fill="transparent"
+                                                  style="stroke-dasharray: 130; stroke-dashoffset: 0; stroke-width:  2;"></path>
+                                            <path class="st5" fill="white"
+                                                  d="M187.8,7c-0.9,5.8,4,10.7,9.7,9.7c3.5-0.6,6.3-3.4,6.9-6.9c0.9-5.8-4-10.7-9.7-9.7C191.2,0.7,188.3,3.5,187.8,7  z"></path>
+                                        </svg>
+                                    {% elseif loop.index == loop.last %}
+                                        <svg class="last-svg">
+                                            <path class="line-first" d="M 5 90, 135 90" stroke="white"
+                                                  fill="transparent"
+                                                  style="stroke-dasharray: 130; stroke-dashoffset: 0; stroke-width:  2;"></path>
+                                            <path class="line-last" d="M 135 90, 195 12" stroke="white"
+                                                  fill="transparent"
+                                                  style="stroke-dasharray: 130; stroke-dashoffset: 0; stroke-width:  2;"></path>
+                                            <path class="st5" fill="white"
+                                                  d="M187.8,7c-0.9,5.8,4,10.7,9.7,9.7c3.5-0.6,6.3-3.4,6.9-6.9c0.9-5.8-4-10.7-9.7-9.7C191.2,0.7,188.3,3.5,187.8,7  z"></path>
+                                        </svg>
+                                    {% else %}
+                                        <svg class="center-svg">
+                                            <path class="line-first" d="M 10 8, 190 8" stroke="white" fill="transparent"
+                                                  style="stroke-dasharray: 190;stroke-dashoffset: 0;stroke-width:  2;"></path>
+                                            <path class="st5" fill="white"
+                                                  d="M187.8,7c-0.9,5.8,4,10.7,9.7,9.7c3.5-0.6,6.3-3.4,6.9-6.9c0.9-5.8-4-10.7-9.7-9.7C191.2,0.7,188.3,3.5,187.8,7  z"></path>
+                                        </svg>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                            <div class="content-img__risk-block-right">Supply Risk Management</div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {#<div class="map">#}
+            {#<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3595.9206693083474!2d55.77766175823322!3d25.673924347013557!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ef60a12ef78cebd%3A0xeba1ade8a0b4982a!2zMjXCsDQwJzI4LjEiTiA1NcKwNDYnNDEuNCJF!5e0!3m2!1sen!2sua!4v1531226985195"#}
+                    {#width="100%" height="380" frameborder="0" style="border:0" allowfullscreen></iframe>#}
+        {#</div>#}
+    </main>
+{% endblock %}
+
+
+

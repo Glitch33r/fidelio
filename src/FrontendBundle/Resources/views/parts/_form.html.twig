@@ -1,0 +1,21 @@
+<div class="content-img contact-form field">
+    {% set flashbag_notices = app.flashes('success') %}
+    {% if flashbag_notices != [] %}
+        <div class="contact-form__title" style="padding: 8% 20px;text-align:  center; margin:  auto;">{{ flashbag_notices[0] }}</div>
+        {% else %}
+            <div class="contact-form__title">Send us a message</div>
+        {{ form_start(form, { 'attr': { 'class': "contact-form__form form-validate", 'name': "contacts-form" }}) }}
+        {{ form_errors(form) }}
+            <div class="contact-form__form-block field">
+                {{ form_row(form.name) }}
+                {{ form_row(form.body) }}
+            </div>
+            <div class="contact-form__form-block field">
+                {{ form_row(form.email) }}
+                {{ form_row(form.telephone) }}
+                <button type="submit" class="contact-form__button">send</button>
+            </div>
+            <div class="class ui error message"></div>
+        {{ form_end(form) }}
+    {% endif %}
+</div>

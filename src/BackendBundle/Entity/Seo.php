@@ -3,6 +3,7 @@ namespace BackendBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
@@ -20,10 +21,15 @@ class Seo
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="BackendBundle\Entity\Page")
-     * @ORM\JoinColumn(name="page_id", referencedColumnName="id")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $page;
+
+    /**
+     * @Gedmo\Slug(fields={"page"},unique=true,separator="-")
+     * @ORM\Column(name="slug", length=255, unique=true)
+     */
+    private $slug;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -112,4 +118,19 @@ class Seo
         $this->description = $description;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param mixed $slug
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    }
 }

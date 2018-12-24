@@ -18,6 +18,10 @@ class Contacts
      */
     private $id;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $subtitle;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -28,11 +32,6 @@ class Contacts
      * @ORM\Column(type="string", nullable=true)
      */
     private $email;
-
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     */
-    private $url;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -55,22 +54,6 @@ class Contacts
     /**
      * @return mixed
      */
-    public function getUrl()
-    {
-        return $this->url;
-    }
-
-    /**
-     * @param mixed $url
-     */
-    public function setUrl($url)
-    {
-        $this->url = $url;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getAddress()
     {
         return $this->address;
@@ -82,6 +65,22 @@ class Contacts
     public function setAddress($address)
     {
         $this->address = $address;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSubtitle()
+    {
+        return $this->subtitle;
+    }
+
+    /**
+     * @param mixed $subtitle
+     */
+    public function setSubtitle($subtitle)
+    {
+        $this->subtitle = $subtitle;
     }
 
     /**

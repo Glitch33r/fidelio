@@ -1,0 +1,24 @@
+<div class="header-nav">
+    <button class="header-nav--button menu-toggle"></button>
+    <nav class="header-nav--nav nav-block">
+        <ul class="nav-block--menu menu">
+            <!-- li.menu--link-->
+            <!--    -if (page == 1) {var class1 = "active"}else {var class1 = ""}-->
+            <!--    a(href="index.html" class=`menu--link-item ${class1}` data-text='main') main-->
+            <li class="menu--link"><a class="menu--link-item " href="{{ url('homepage') }}" data-text="about us">about
+                    us</a>
+            </li>
+            <li class="menu--link"><a class="menu--link-item " href="{{ url('responsibility') }}"
+                                      data-text="Responsibility">Responsibility</a>
+            </li>
+            <li class="menu--link"><a class="menu--link-item " href="{{ url('trading') }}"
+                                      data-text="trading">trading</a>
+            </li>
+            <li class="menu--link"><a class="menu--link-item " href="{{ url('projects') }}" data-text="projects">projects</a>
+            </li>
+            <li class="menu--link"><a class="menu--link-item " href="{{ url('contact-us') }}" data-text="contact us">contact
+                    us</a>
+            </li>
+        </ul>
+    </nav>
+</div>

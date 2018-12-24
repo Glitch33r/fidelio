@@ -11,17 +11,28 @@ imports:
 parameters:
     locale: en
 
-    app.path.category_images: /uploads/images/categories
+    app.path.responsibility_images: /uploads/images/responsibility
+    app.path.about_images: /uploads/images/about
+    app.path.trade_images: /uploads/images/trade
+    app.path.project_images: /uploads/images/project
 
 
 
 vich_uploader:
     db_driver: orm
     mappings:
-            category_images:
-                uri_prefix:         '%app.path.category_images%'
-                upload_destination: '%kernel.root_dir%/../web/uploads/images/categories'
-
+            responsibility_images:
+                uri_prefix:         '%app.path.responsibility_images%'
+                upload_destination: '%kernel.root_dir%/../web/uploads/images/responsibility'
+            about_images:
+                uri_prefix:         '%app.path.about_images%'
+                upload_destination: '%kernel.root_dir%/../web/uploads/images/about'
+            trade_images:
+                  uri_prefix:         '%app.path.trade_images%'
+                  upload_destination: '%kernel.root_dir%/../web/uploads/images/trade'
+            project_images:
+                  uri_prefix:         '%app.path.project_images%'
+                  upload_destination: '%kernel.root_dir%/../web/uploads/images/project'
 
 liip_imagine:
     resolvers:

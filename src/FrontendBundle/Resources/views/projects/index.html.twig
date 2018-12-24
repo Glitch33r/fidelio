@@ -1,0 +1,61 @@
+{% extends '@Frontend/base.html.twig' %}
+
+{% block title %}{{ seo.title }}{% endblock %}
+{% block description %}{{ seo.description }}{% endblock %}
+{% block keywords %}{{ seo.keywords }}{% endblock %}
+
+
+{#{% block bodyclass %}class="responsіbility"{% endblock %}#}
+
+{% block headerbg %}style="background:url({{ asset('/bundles/frontend/image/about-us.png') }});"{% endblock %}
+
+
+{% block header %}
+    {% include '@Frontend/parts/_header.html.twig' with {'subtitle': projects.subtitle, 'headertitle': seo.title } %}
+{% endblock %}
+
+{% block mob %}
+    {% include '@Frontend/parts/_mob-menu.html.twig' %}
+{% endblock %}
+
+
+{% block content %}
+    <main>
+        <section class="main-wrap">
+            {% for i in projects.part %}
+                {% if loop.index in [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21] %}
+                    <div class="main-wrap__text-block main-wrap__text-block_small-article">
+                        <div class="content__article content__article_small">
+                            <img src="{{ asset('/uploads/images/project/' ~ i.image) }}">
+                        </div>
+                        <div class="content__article content__article_small">
+                            <h2 class="main-wrap__block-title-txt">{{ i.name }}</h2>
+                            <p class="media-block__txt">
+                                {{ i.text|raw }}
+                            </p>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="main-wrap__text-block main-wrap__text-block_small-article">
+                        <div class="content__article content__article_small">
+                            <h2 class="main-wrap__block-title-txt">{{ i.name }}</h2>
+                            <p class="media-block__txt">
+                                {{ i.text|raw }}
+                            </p>
+                        </div>
+                        <img src="{{ asset('/uploads/images/project/' ~ i.image) }}">
+                    </div>
+                {% endif %}
+                {% if loop.index == loop.last %}
+                    <div class="content__buttons">
+                        <a class="header-wrap__right-button header-wrap__right-button_second-button"
+                           href="{{ url('contact-us') }}">contact us</a>
+                        <a class="header-wrap__right-button header-wrap__right-button_first-button"
+                                href="{{ url('homepage') }}">about us</a>
+                    </div>
+            {% endif %}
+        {% endfor %}
+        </section>
+    </main>
+{% endblock %}
+

@@ -1,0 +1,43 @@
+{% extends '@Frontend/base.html.twig' %}
+
+{% block title %}{{ seo.title }}{% endblock %}
+{% block description %}{{ seo.description }}{% endblock %}
+{% block keywords %}{{ seo.keywords }}{% endblock %}
+
+{#{% block bodyclass %}class="contact-us"{% endblock %}#}
+
+{% block headerbg %}style="background:url({{ asset('/bundles/frontend/image/about-us.png') }});"{% endblock %}
+
+
+{% block header %}
+    {% include '@Frontend/parts/_header.html.twig' with {'subtitle': contacts.subtitle, 'headertitle': seo.title } %}
+{% endblock %}
+
+{% block mob %}
+    {% include '@Frontend/parts/_mob-menu.html.twig' %}
+{% endblock %}
+
+
+{% block content %}
+    <main>
+        <section class="main-wrap">
+            <div class="contact-block my-animate">
+                <div class="contact-block__item"><span class="contact__img contact__img_phone"></span>
+                    <div class="contact__txt"> <a href="tel:{{ contacts.firstTelephone }}">{{ contacts.firstTelephone }}</a></div>
+                </div>
+                <div class="contact-block__item">
+                    <div class="contact__img contact__img_mark"></div>
+                    <div class="contact__txt contact__txt_big">
+                        {{ contacts.address }}
+                    </div>
+                </div>
+                <div class="contact-block__item">
+                    <div class="contact__img contact__img_msg"></div>
+                    <div class="contact__txt"> <a href="mailto:sales@fidelio.business">{{ contacts.email }}</a></div>
+                </div>
+            </div>
+        </section>
+        {{ render(controller('FrontendBundle:Default:createFormContactUs')) }}
+        <section class="map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3595.9206693083474!2d55.77766175823322!3d25.673924347013557!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ef60a12ef78cebd%3A0xeba1ade8a0b4982a!2zMjXCsDQwJzI4LjEiTiA1NcKwNDYnNDEuNCJF!5e0!3m2!1sen!2sua!4v1531226985195" width="100%" height="380" frameborder="0" style="border:0" allowfullscreen></iframe></section>
+    </main>
+{% endblock %}
